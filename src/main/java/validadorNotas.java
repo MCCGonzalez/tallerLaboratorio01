@@ -5,6 +5,10 @@ public class validadorNotas {
 
     public static void main(String[] args){
 
+        variablesIniciales();
+    }
+    public static void variablesIniciales(){
+
         double[][] estudiantes = new double[50][5];
         int cantidadEstudiantes = 0;
 
@@ -18,7 +22,9 @@ public class validadorNotas {
         + "\n2) ver notas estudiantes"
         + "\n3) estudiantes aprobados"
         + "\n4) estudiantes reprobados"
-        + "\n5) estudiantes que van a examen");
+        + "\n5) estudiantes que van a examen"
+        + "\n6) estado del estudiante"
+        + "\n7) salir");
 
         entrada(estudiantes, cantidadEstudiantes);
     }
@@ -57,6 +63,8 @@ public class validadorNotas {
             case 3:estudiantesAprobados(estudiantes);
             case 4:estudiantesReprobados(estudiantes);
             case 5:estudiantesExamen(estudiantes);
+            case 6:estadoEstudiante(estudiantes);
+            case 7:salir();
         }
     }
     public static int cantidadEstudiantes(int cantidadEstudiantes){
@@ -109,7 +117,7 @@ public class validadorNotas {
                 notaEstudiante += estudiantes[fila][columna];
             }
             notaEstudiante /= 5;
-            if(notaEstudiante <= 3.54){
+            if(notaEstudiante >= 3.94){
                 estudiantesAprobados ++;
             }
         }
@@ -149,6 +157,35 @@ public class validadorNotas {
         }
         System.out.println("estudiantes que van a examen: " + estudiantesExamen);
     }
+    public static void estadoEstudiante(double[][] estudiantes){
 
+        Scanner sc = new Scanner(System.in);
+        int estudiante = sc.nextInt();
+        int promedio = 0;
+
+        for(int pocision = 0; pocision < estudiantes[estudiante].length; pocision++){
+
+            promedio += estudiantes[estudiante][pocision];
+        }
+        promedio /= 5;
+
+        if(promedio > 0 && promedio <= 3.54){
+
+            System.out.println("el estudiante reprobo");
+
+        }else if(promedio > 3.54 && promedio <= 3.94 ){
+
+            System.out.println("El estudiante va a examen");
+        }else if(promedio > 3.94 && promedio <= 7.0){
+
+            System.out.println("el estudiante aprobo");
+        }else{
+            System.out.println("El promedio no es valido");
+        }
+    }
+    public static void salir(){
+        
+        System.exit(1);
+    }
 }
 
