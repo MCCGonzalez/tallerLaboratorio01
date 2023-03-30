@@ -15,7 +15,7 @@ public class validadorNotas {
 
         System.out.println("Bienbenido, ingrese un numero"
         + "\n1) ingresar notas estudiantes"
-        + "\n2) ingresar"
+        + "\n2) ver notas estudiantes"
         + "\n3) ingresar");
 
         entrada(estudiantes, cantidadEstudiantes);
@@ -50,13 +50,21 @@ public class validadorNotas {
             case 1:cantidadEstudiantes(cantidadEstudiantes);
                    ingresarEstudiante(estudiantes, cantidadEstudiantes);
                    entrada(estudiantes, cantidadEstudiantes);
-            case 2:mostrarNotasEstudiantes(estudiantes);
+            case 2:mostrarNotasEstudiantes(estudiantes, cantidadEstudiantes);
             case 3:
         }
     }
     public static int cantidadEstudiantes(int cantidadEstudiantes){
 
-        cantidadEstudiantes++;
+        Random random = new Random();
+
+        if(cantidadEstudiantes == 0) {
+
+            cantidadEstudiantes += random.nextInt(50) + 1;
+            System.out.println(cantidadEstudiantes);
+
+        }
+            cantidadEstudiantes ++;
 
         return cantidadEstudiantes;
     }
@@ -64,32 +72,26 @@ public class validadorNotas {
 
         Random random = new Random();
 
+            for (int fila = 0; fila < cantidadEstudiantes; fila++) {
+                for (int columna = 0; columna < estudiantes[fila].length; columna++) {
 
-        do{
-
-            //System.out.println("se ingresan muchos estudiantes");
-
-            for(int fila = 0;  fila < estudiantes.length; fila++){
-                for(int columna = 0; columna < estudiantes[fila].length; columna++){
-
-                    estudiantes[fila][columna] = random.nextDouble(7)*10.0/10.0;
+                    estudiantes[fila][columna] = Math.round(random.nextDouble(7) * 10.0) / 10.0;
                 }
             }
-
-        }while(cantidadEstudiantes == 0);
 
         return estudiantes;
     }
 
-    public static void mostrarNotasEstudiantes(double[][] estudiantes){
+    public static void mostrarNotasEstudiantes(double[][] estudiantes, int cantidadEstudiantes){
 
         for(int fila = 0; fila < estudiantes.length; fila++){
             for(int columna = 0; columna < estudiantes[fila].length; columna++){
 
-                System.out.print(estudiantes + "   ");
+                System.out.print(estudiantes[fila][columna] + "   ");
             }
             System.out.println();
         }
 
+        entrada(estudiantes, cantidadEstudiantes);
     }
 }
