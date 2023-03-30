@@ -13,10 +13,12 @@ public class validadorNotas {
 
     private static void inicio(double[][] estudiantes, int cantidadEstudiantes){
 
-        System.out.println("Bienbenido, ingrese un numero"
+        System.out.println("Bienvenido, ingrese un numero"
         + "\n1) ingresar notas estudiantes"
         + "\n2) ver notas estudiantes"
-        + "\n3) ingresar");
+        + "\n3) estudiantes aprobados"
+        + "\n4) estudiantes reprobados"
+        + "\n5) estudiantes que van a examen");
 
         entrada(estudiantes, cantidadEstudiantes);
     }
@@ -45,13 +47,16 @@ public class validadorNotas {
 
     public static void menu(int entrada, double[][] estudiantes, int cantidadEstudiantes){
 
+
         switch(entrada){
 
             case 1:cantidadEstudiantes(cantidadEstudiantes);
                    ingresarEstudiante(estudiantes, cantidadEstudiantes);
-                   entrada(estudiantes, cantidadEstudiantes);
-            case 2:mostrarNotasEstudiantes(estudiantes, cantidadEstudiantes);
-            case 3:
+                   inicio(estudiantes, cantidadEstudiantes);
+            case 2:mostrarNotasEstudiantes(estudiantes);
+            case 3:estudiantesAprobados(estudiantes);
+            case 4:estudiantesReprobados(estudiantes);
+            case 5:estudiantesExamen(estudiantes);
         }
     }
     public static int cantidadEstudiantes(int cantidadEstudiantes){
@@ -82,7 +87,7 @@ public class validadorNotas {
         return estudiantes;
     }
 
-    public static void mostrarNotasEstudiantes(double[][] estudiantes, int cantidadEstudiantes){
+    public static void mostrarNotasEstudiantes(double[][] estudiantes){
 
         for(int fila = 0; fila < estudiantes.length; fila++){
             for(int columna = 0; columna < estudiantes[fila].length; columna++){
@@ -92,6 +97,58 @@ public class validadorNotas {
             System.out.println();
         }
 
-        entrada(estudiantes, cantidadEstudiantes);
     }
+    public static void estudiantesAprobados(double[][] estudiantes){
+
+        int estudiantesAprobados = 0;
+        int notaEstudiante = 0;
+
+        for(int fila = 0; fila < estudiantes.length; fila++){
+            for(int columna = 0; columna < estudiantes[fila].length; columna ++){
+
+                notaEstudiante += estudiantes[fila][columna];
+            }
+            notaEstudiante /= 5;
+            if(notaEstudiante <= 3.54){
+                estudiantesAprobados ++;
+            }
+        }
+        System.out.println("estudiantes aprobados: " + estudiantesAprobados);
+    }
+    public static void estudiantesReprobados(double[][] estudiantes){
+
+        int estudiantesReprobados = 0;
+        int notaEstudiante = 0;
+
+        for(int fila = 0; fila < estudiantes.length; fila++){
+            for(int columna = 0; columna < estudiantes[fila].length; columna ++){
+
+                notaEstudiante += estudiantes[fila][columna];
+            }
+            notaEstudiante /= 5;
+            if(notaEstudiante <= 3.54){
+                estudiantesReprobados ++;
+            }
+        }
+        System.out.println("estudiantes reporbados: " + estudiantesReprobados);
+    }
+    public static void estudiantesExamen(double[][] estudiantes){
+
+        int estudiantesExamen = 0;
+        int notaEstudiante = 0;
+
+        for(int fila = 0; fila < estudiantes.length; fila++){
+            for(int columna = 0; columna < estudiantes[fila].length; columna ++){
+
+                notaEstudiante += estudiantes[fila][columna];
+            }
+            notaEstudiante /= 5;
+            if(notaEstudiante > 3.54 && notaEstudiante <= 3.94){
+                estudiantesExamen++;
+            }
+        }
+        System.out.println("estudiantes que van a examen: " + estudiantesExamen);
+    }
+
 }
+
